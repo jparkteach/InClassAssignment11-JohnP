@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class PersonViewHolder extends RecyclerView.ViewHolder {
 
 
@@ -16,6 +19,7 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
     private TextView personAliveText;
     private Context context;
 
+    private DatabaseReference peopleReference = FirebaseDatabase.getInstance().getReference("people");
 
     public PersonViewHolder(View itemView) {
         super(itemView);
@@ -34,6 +38,7 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                peopleReference.child(person.id).removeValue();
                 Toast.makeText(context, personNameText.getText(), Toast.LENGTH_SHORT).show();
             }
         });
