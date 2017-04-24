@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -62,8 +63,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_add_vendor:
-                Intent Intent = new Intent(this, SecondActivity.class);
-                startActivity(Intent);
+                String id = UUID.randomUUID().toString();
+                Random random = new Random();
+                Vendor passvendor = new Vendor(id, "Enter Vendor Name", "Enter Vendor Info",
+                        R.drawable.amazonia, false, false, 0.00, 0, 0, 0, 0);
+                Intent intent = SecondActivity.makeIntent(this, passvendor);
+                this.startActivity(intent);
+                Toast.makeText(this, "Add New Vendor Here", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_item_add_person:
                 addPerson();
