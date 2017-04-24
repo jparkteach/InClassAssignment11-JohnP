@@ -32,6 +32,8 @@ public class SecondActivity extends AppCompatActivity {
     private Vendor vendor2;
     private DatabaseReference vendorsReference = FirebaseDatabase.getInstance().getReference("vendors");
 
+    private TextView vendorNameView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,7 @@ public class SecondActivity extends AppCompatActivity {
     private void setupEndActivityButton() {
         Button button = (Button) findViewById(R.id.close);
         ImageView vendorLogoView = (ImageView) findViewById(R.id.vendor_logo2);
-        TextView vendorNameView = (TextView) findViewById(R.id.vendor_name2);
+        vendorNameView = (TextView) findViewById(R.id.vendor_name2);
         TextView vendorInfoView = (TextView) findViewById(R.id.vendor_info2);
         vendorLogoView.setImageResource(vendor2.getLogoId());
         vendorNameView.setText(vendor2.getName());
@@ -79,6 +81,7 @@ public class SecondActivity extends AppCompatActivity {
 
     public static Intent makeIntent(Context context, Vendor vendor) {
         Intent intent = new Intent(context, SecondActivity.class);
+        intent.putExtra(EXTRA_ID, vendor.getId());
         intent.putExtra(EXTRA_NAME, vendor.getName());
         intent.putExtra(EXTRA_INFO, vendor.getInfo());
         intent.putExtra(EXTRA_LOGOID, vendor.getLogoId());
@@ -102,7 +105,7 @@ public class SecondActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_save:
-                vendorsReference.child(vendor2.id).setValue(new Vendor(vendor2.id, vendor2.name,
+                vendorsReference.child(vendor2.id).setValue(new Vendor(vendor2.id, vendorNameView.getText().toString(),
                         vendor2.info, vendor2.logoId, vendor2.freeShip, vendor2.pickupAvailable,
                         vendor2.exchangeRateEuro, vendor2.exchangeRateReal, vendor2.exchangeRateYen,
                         vendor2.exchangeRateYuon, vendor2.exchangeRateWon));
