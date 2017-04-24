@@ -38,7 +38,7 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                peopleReference.child(person.id).removeValue();
+//                peopleReference.child(person.id).removeValue();
                 Toast.makeText(context, personNameText.getText(), Toast.LENGTH_SHORT).show();
             }
         });

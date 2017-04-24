@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/vendor_logo"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"
+            tools:src="@drawable/amazonia" />
+
+        <TextView
+            android:id="@+id/vendor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/vendor_logo"
+            tools:text="Amazonia Cambio - Exchange"
+            android:textSize="20sp" />
+
+        <TextView
+            android:padding="10dp"
+            android:id="@+id/vendor_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vendor_name"
+            android:layout_toRightOf="@+id/vendor_logo"
+            tools:text="Fone:(92) 3622-7206\nFax:(92) 3232-4507" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
