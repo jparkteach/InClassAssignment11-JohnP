@@ -82,6 +82,13 @@ public class SecondActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_NAME, vendor.getName());
         intent.putExtra(EXTRA_INFO, vendor.getInfo());
         intent.putExtra(EXTRA_LOGOID, vendor.getLogoId());
+        intent.putExtra(EXTRA_FREESHIP, vendor.isFreeShip());
+        intent.putExtra(EXTRA_PICKUPAVAILABLE, vendor.isPickupAvailable());
+        intent.putExtra(EXTRA_EXCHANGERATEEURO, vendor.getExchangeRateEuro());
+        intent.putExtra(EXTRA_EXCHANGERATEREAL, vendor.getExchangeRateReal());
+        intent.putExtra(EXTRA_EXCHANGERATEYEN, vendor.getExchangeRateYen());
+        intent.putExtra(EXTRA_EXCHANGERATEYUON, vendor.getExchangeRateYuon());
+        intent.putExtra(EXTRA_EXCHANGERATEWON, vendor.getExchangeRateWon());
         return intent;
     }
 
