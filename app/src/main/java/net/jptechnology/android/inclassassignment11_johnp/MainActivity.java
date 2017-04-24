@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -47,11 +48,15 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
+    private RecyclerView recyclerView2;
     private PeopleAdapter peopleAdapter;
     private VendorsAdapter vendorsAdapter;
 
     private DatabaseReference peopleReference = FirebaseDatabase.getInstance().getReference("people");
     private DatabaseReference vendorsReference = FirebaseDatabase.getInstance().getReference("vendors");
+
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private DatabaseReference userReference = FirebaseDatabase.getInstance().getReference(auth.getCurrentUser().getUid() + "/user");
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,6 +96,14 @@ public class MainActivity extends AppCompatActivity {
         // peopleAdapter is from firebase
 
         recyclerView.setAdapter(peopleAdapter);
+
+        recyclerView2 = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        vendorsAdapter = new VendorsAdapter(vendorsReference);
+
+        recyclerView2.setAdapter(vendorsAdapter);
+        recyclerView2.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -108,21 +121,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showVendors(View view) {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        vendorsAdapter = new VendorsAdapter(vendorsReference);
-
-        recyclerView.setAdapter(vendorsAdapter);
+        recyclerView.setVisibility(View.INVISIBLE);
+        recyclerView2.setVisibility(View.VISIBLE);
     }
 
     public void showPeople(View view) {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        peopleAdapter = new PeopleAdapter(peopleReference);
-
-        recyclerView.setAdapter(peopleAdapter);
+        recyclerView2.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 }
 

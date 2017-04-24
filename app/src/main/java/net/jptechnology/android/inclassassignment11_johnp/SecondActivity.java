@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,6 +34,7 @@ public class SecondActivity extends AppCompatActivity {
     private DatabaseReference vendorsReference = FirebaseDatabase.getInstance().getReference("vendors");
 
     private TextView vendorNameView;
+    private TextView vendorInfoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,7 @@ public class SecondActivity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.close);
         ImageView vendorLogoView = (ImageView) findViewById(R.id.vendor_logo2);
         vendorNameView = (TextView) findViewById(R.id.vendor_name2);
-        TextView vendorInfoView = (TextView) findViewById(R.id.vendor_info2);
+        vendorInfoView = (TextView) findViewById(R.id.vendor_info2);
         vendorLogoView.setImageResource(vendor2.getLogoId());
         vendorNameView.setText(vendor2.getName());
         vendorInfoView.setText(vendor2.getInfo());
@@ -106,9 +108,11 @@ public class SecondActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_item_save:
                 vendorsReference.child(vendor2.id).setValue(new Vendor(vendor2.id, vendorNameView.getText().toString(),
-                        vendor2.info, vendor2.logoId, vendor2.freeShip, vendor2.pickupAvailable,
+                        vendorInfoView.getText().toString(), vendor2.logoId, vendor2.freeShip, vendor2.pickupAvailable,
                         vendor2.exchangeRateEuro, vendor2.exchangeRateReal, vendor2.exchangeRateYen,
                         vendor2.exchangeRateYuon, vendor2.exchangeRateWon));
+                Toast.makeText(this, "Vendor Saved", Toast.LENGTH_SHORT).show();
+                finish();
                 return true;
             case R.id.menu_item_trash:
                 vendorsReference.child(vendor2.id).removeValue();
