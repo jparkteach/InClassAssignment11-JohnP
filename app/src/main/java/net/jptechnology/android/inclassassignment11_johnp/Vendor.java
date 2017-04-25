@@ -14,7 +14,9 @@ public class Vendor {
     public double exchangeRateYuon;
     public double exchangeRateWon;
 
-    public Vendor(String id, String name, String info, int logoId, boolean freeShip, boolean pickupAvailable, double exchangeRateEuro, double exchangeRateReal, double exchangeRateYen, double exchangeRateYuon, double exchangeRateWon) {
+    public Vendor(String id, String name, String info, int logoId, boolean freeShip,
+                  boolean pickupAvailable, double exchangeRateEuro, double exchangeRateReal,
+                  double exchangeRateYen, double exchangeRateYuon, double exchangeRateWon) {
         this.id = id;
         this.name = name;
         this.info = info;

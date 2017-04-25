@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference vendorsReference = FirebaseDatabase.getInstance().getReference("vendors");
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-    private DatabaseReference userReference = FirebaseDatabase.getInstance().getReference(auth.getCurrentUser().getUid() + "/user");
+    private DatabaseReference ordersReference = FirebaseDatabase.getInstance().getReference(auth.getCurrentUser().getUid() + "/orders");
+    private DatabaseReference profileReference = FirebaseDatabase.getInstance().getReference(auth.getCurrentUser().getUid() + "/profile");
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        peopleAdapter = new PeopleAdapter(peopleReference); // Stop listening if the activity is destroyed
-        // peopleAdapter is from firebase
+        peopleAdapter = new PeopleAdapter(peopleReference);
+        vendorsAdapter = new VendorsAdapter(vendorsReference);
 
         recyclerView.setAdapter(peopleAdapter);
 

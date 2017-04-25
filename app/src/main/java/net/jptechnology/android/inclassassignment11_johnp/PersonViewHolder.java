@@ -12,7 +12,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class PersonViewHolder extends RecyclerView.ViewHolder {
 
-
     private CardView cardView;
     private TextView personNameText;
     private TextView personAgeText;

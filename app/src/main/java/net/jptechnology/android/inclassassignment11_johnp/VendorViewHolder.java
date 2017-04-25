@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class VendorViewHolder extends RecyclerView.ViewHolder {
 
     private CardView cardView;
@@ -17,14 +20,17 @@ public class VendorViewHolder extends RecyclerView.ViewHolder {
     private ImageView vendorLogoView;
     private Context context;
 
-    public VendorViewHolder(View itemView, Context context) {
+    private DatabaseReference vendorsReference = FirebaseDatabase.getInstance().getReference("vendors");
+
+    public VendorViewHolder(View itemView) {
         super(itemView);
         cardView = (CardView) itemView.findViewById(R.id.card_view);
         vendorNameView = (TextView) itemView.findViewById(R.id.vendor_name);
         vendorInfoView = (TextView) itemView.findViewById(R.id.vendor_info);
         vendorLogoView = (ImageView) itemView.findViewById(R.id.vendor_logo);
-        this.context = context;
+        this.context = itemView.getContext();
     }
+
 
     public void bind(final Vendor vendor) {
         vendorNameView.setText(vendor.name);
